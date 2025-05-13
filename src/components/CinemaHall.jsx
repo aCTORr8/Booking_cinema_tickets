@@ -1,9 +1,9 @@
-// src/components/CinemaHall.jsx
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getBookedSeats } from '../services/BookingService';
-import './CinemaHall.css';
 
-const CinemaHall = ({ movieId }) => {
+const CinemaHall = () => {
+  const { movieId } = useParams();
   const [bookedSeats, setBookedSeats] = useState([]);
 
   useEffect(() => {

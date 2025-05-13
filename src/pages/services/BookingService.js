@@ -7,7 +7,7 @@ export const getBookedSeats = (movieId) => {
     .flatMap(booking => booking.seats);
 };
 
-export const saveBooking = (movieId, userDetails, selectedSeats) => {
+export const saveBooking = (movieId, userDetails, selectedSeats) => { 
   const allBookings = JSON.parse(localStorage.getItem(BOOKED_SEATS_KEY)) || [];
   allBookings.push({
     movieId,

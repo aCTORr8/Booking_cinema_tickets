@@ -26,7 +26,7 @@ const CinemaHall = () => {
   const handleBooking = () => {
     const { name, phone, email } = userDetails;
     if (!name || !phone || !email) {
-      toast.error("Заповніть усі поля!");
+      toast.error("Заповніть всі поля!");
       return;
     }
 
