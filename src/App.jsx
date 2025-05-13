@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Booking from './pages/Booking';
 import './index.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -12,6 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/booking/:id" element={<Booking />} />
         </Routes>
+        <ToastContainer />
         <footer className="footer">
           <div className="footer-content">
             <p>Телефон: +38 055 555 5555</p>
