@@ -9,6 +9,7 @@ const CinemaHall = () => {
   const [bookedSeats, setBookedSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [userDetails, setUserDetails] = useState({ name: "", phone: "", email: "" });
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const seats = getBookedSeats(id);
@@ -17,8 +18,8 @@ const CinemaHall = () => {
 
   const handleSeatClick = (seat) => {
     if (bookedSeats.includes(seat)) return;
-    setSelectedSeats(prev =>
-      prev.includes(seat) ? prev.filter(s => s !== seat) : [...prev, seat]
+    setSelectedSeats((prev) =>
+      prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
     );
   };
 
@@ -36,58 +37,79 @@ const CinemaHall = () => {
     }
 
     saveBooking(id, userDetails, selectedSeats);
-    setBookedSeats(prev => [...prev, ...selectedSeats]);
+    setBookedSeats((prev) => [...prev, ...selectedSeats]);
     toast.success("Бронювання успішне!");
 
     setSelectedSeats([]);
     setUserDetails({ name: "", phone: "", email: "" });
+    setShowForm(false);
   };
 
   const seats = Array.from({ length: 30 }, (_, i) => `Місце ${i + 1}`);
 
   return (
-    <div className="container">
-      <div className='cinema-title'><h2>Фільм ID: {id}</h2></div>
-        <div className="cinema-hall">
-          {seats.map((seat) => (
-            <button
-              key={seat}
-              onClick={() => handleSeatClick(seat)}
-              className={`seat 
-                ${bookedSeats.includes(seat) ? "booked" : ""}
-                ${selectedSeats.includes(seat) ? 'selected' : 'available'}
-              `}
-              disabled={bookedSeats.includes(seat)}
-            >
-              {seat}
-            </button>
-          ))}
-        </div>
+    <div className="home-container">
+      <h2 className="home-title">Фільм ID: {id}</h2>
 
-      <div className="form">
-        <h3>Вибрані місця:</h3>
-        <p>{selectedSeats.join(", ") || "Немає"}</p>
-
-        <input
-          type="text"
-          placeholder="Ім'я"
-          value={userDetails.name}
-          onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Телефон"
-          value={userDetails.phone}
-          onChange={(e) => setUserDetails({ ...userDetails, phone: e.target.value })}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={userDetails.email}
-          onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
-        />
-        <button onClick={handleBooking}>Забронювати</button>
+      <div className="cinema-hall">
+        {seats.map((seat) => (
+          <button
+            key={seat}
+            onClick={() => handleSeatClick(seat)}
+            className={`seat 
+              ${bookedSeats.includes(seat) ? "booked" : ""}
+              ${selectedSeats.includes(seat) ? "selected" : "available"}
+            `}
+            disabled={bookedSeats.includes(seat)}
+          >
+            {seat}
+          </button>
+        ))}
       </div>
+
+      {selectedSeats.length > 0 && (
+        <div className="selected-seats">
+          <strong>Вибрані місця:</strong>
+          <div className="seats-list">
+            {selectedSeats.map((s) => (
+              <span key={s} className="seat-chip">{s}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!showForm && selectedSeats.length > 0 && (
+        <button className="book-btn" onClick={() => setShowForm(true)}>
+          Забронювати
+        </button>
+      )}
+
+      {showForm && (
+        <form className="booking-form show" onSubmit={(e) => { e.preventDefault(); handleBooking(); }}>
+          <input
+            type="text"
+            placeholder="Ім'я"
+            value={userDetails.name}
+            onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Телефон"
+            value={userDetails.phone}
+            onChange={(e) => setUserDetails({ ...userDetails, phone: e.target.value })}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={userDetails.email}
+            onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
+            required
+          />
+          <button type="submit">Підтвердити бронювання</button>
+        </form>
+      )}
     </div>
   );
 };
