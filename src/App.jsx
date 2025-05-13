@@ -10,11 +10,15 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/booking/:id" element={<Booking />} />
-        </Routes>
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/booking/:id" element={<Booking />} />
+          </Routes>
+        </div>
+
         <ToastContainer />
+
         <footer className="footer">
           <div className="footer-content">
             <p>Телефон: +38 055 555 5555</p>
