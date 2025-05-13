@@ -247,6 +247,88 @@ body {
   margin-bottom: 30px;
 }
 
+.booking-form {
+  display: none;
+  background-color: #2a2a2a;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 30px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.booking-form.show {
+  display: block;
+  opacity: 1;
+}
+
+.booking-form h3 {
+  font-size: 1.8rem;
+  color: #1DB954;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.booking-form input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.booking-form input:focus {
+  border-color: #1DB954;
+}
+
+.booking-form button {
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+  background-color: #519f6c;
+}
+
+.booking-form .error {
+  color: #f44336;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.book-btn {
+  margin-top: 20px;
+  background-color: #6ba439;
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #17a74a;
+}
+
 .selected-seats {
   margin-top: 20px;
   font-size: 16px;
